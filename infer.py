@@ -74,12 +74,12 @@ def inferHandler(event, context):
     data = base64.b64decode(tile_base64)
     
 
-#    bucket.put_object(
-#        ContentType='image/png',
-#        Key=path,
-#        Body=data,
-#        ACL='public-read'
-#    )
+    bucket.put_object(
+        ContentType='image/png',
+        Key=path,
+        Body=data,
+        ACL='public-read'
+    )
 
 
     response = {
