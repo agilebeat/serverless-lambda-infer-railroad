@@ -18,7 +18,7 @@ control over aws). Finally we will deploy lambda function.
 
 At this point we are assuming that you have executed the steps listed in the
 Readme.md for the docker-serverless-aws-client project. You should have running 
-docker container and have shell terminal: `root@<IMAGE-ID>:/notebooks#`
+docker container and have shell terminal: `root@<IMAGE-ID>:/classify-lambda#`
 
 #### Step 1. Set pu virtual python environment
 
@@ -58,4 +58,6 @@ docker container and have shell terminal: `root@<IMAGE-ID>:/notebooks#`
    *Comment: Serverless plugins are extensions for serverless allowing to get more granula
    control for different cloud providers: aws, asure ...*
    
-6. 
+6. Finally run deploy command:
+
+   `serverless deploy -v`
