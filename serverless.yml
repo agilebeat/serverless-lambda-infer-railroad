@@ -22,7 +22,7 @@ provider:
 # you can add packaging information here
 package:
   exclude:
-    - MaproverEnv36/**
+    - python.venv/**
 
 functions:
   infer:
