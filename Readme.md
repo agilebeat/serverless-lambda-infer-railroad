@@ -48,8 +48,11 @@ docker container and have shell terminal: `root@<IMAGE-ID>:/notebooks#`
 5. Install necessary plugins for serverless. Run:
    
    `serverless plugin install -n serverless-python-requirements`
+   
    `serverless plugin install -n serverless-reqvalidator-plugin`
+   
    `serverless plugin install -n serverless-aws-documentation`
+   
    `serverless plugin install -n serverless-plugin-custom-roles`
    
    *Comment: Serverless plugins are extensions for serverless allowing to get more granula
