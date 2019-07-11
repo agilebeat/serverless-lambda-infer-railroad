@@ -37,3 +37,22 @@ docker container and have shell terminal: `root@<IMAGE-ID>:/notebooks#`
 3. Install packages necessary for lambda in the virtual environment:
 
    `pip install tensorflow==1.10.0`
+   
+   `pip install pillow`
+   
+4. Capture python packages in a file so that serverless will know which 
+   python packages should be included in zip file containing lambda function
+   
+   `pip freeze > requirements.txt`
+   
+5. Install necessary plugins for serverless. Run:
+   
+   `serverless plugin install -n serverless-python-requirements`
+   `serverless plugin install -n serverless-reqvalidator-plugin`
+   `serverless plugin install -n serverless-aws-documentation`
+   `serverless plugin install -n serverless-plugin-custom-roles`
+   
+   *Comment: Serverless plugins are extensions for serverless allowing to get more granula
+   control for different cloud providers: aws, asure ...*
+   
+6. 
