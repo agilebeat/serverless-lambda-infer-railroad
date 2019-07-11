@@ -61,3 +61,20 @@ docker container and have shell terminal: `root@<IMAGE-ID>:/classify-lambda#`
 6. Finally run deploy command:
 
    `serverless deploy -v`
+   
+   
+At this point the lambda function has been deployed. Now you have to create two 
+buckets, make them public for read only. Also you have to add cors support 
+for both buckets.
+
+Just navigate to the bucket -> Permissions -> Cors Configuration
+
+```
+<CORSConfiguration>
+ <CORSRule>
+   <AllowedOrigin>*</AllowedOrigin>
+   <AllowedMethod>GET</AllowedMethod>
+   <AllowedHeader>*</AllowedHeader>
+ </CORSRule>
+</CORSConfiguration>
+```
