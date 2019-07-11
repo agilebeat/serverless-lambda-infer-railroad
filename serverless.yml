@@ -57,7 +57,7 @@ functions:
           private: false
           request:
             schema:
-              "application/json": ${file(models/input.json)}
+              "application/json": ${file(api-gateway-models/input.json)}
 
 # you can add CloudFormation resource templates here
 resources:
