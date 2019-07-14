@@ -62,10 +62,10 @@ def inferHandler(event, context):
     AWS_BUCKET_NAME_other = 'md-other-maprover' 
 
     if predictions[0][0] > predictions[0][1]:
-        dic = 'Other'
+        dic = False
         AWS_BUCKET_NAME = AWS_BUCKET_NAME_other
     else:
-        dic = 'Rail'
+        dic = True
         AWS_BUCKET_NAME = AWS_BUCKET_NAME_rail
 
     s3 = boto3.resource('s3')
@@ -84,7 +84,8 @@ def inferHandler(event, context):
 
     response = {
         "statusCode": 200,
-        "body": json.dumps(dic)
+        "headers": {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+        "body": json.dumps({'RailClass': dic})
     }
     
     return response
