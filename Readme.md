@@ -57,8 +57,15 @@ docker container and have shell terminal: `root@<IMAGE-ID>:/classify-lambda#`
    
    *Comment: Serverless plugins are extensions for serverless allowing to get more granula
    control for different cloud providers: aws, asure ...*
+
+6. In * infer.py * modify lambda function to reflect proper buckets
    
-6. Finally run deploy command:
+   ```
+    AWS_BUCKET_NAME_rail = 'md-rail-maprover'
+    AWS_BUCKET_NAME_other = 'md-other-maprover'
+   ``` 
+  
+7. Finally run deploy command:
 
    `serverless deploy -v`
    
