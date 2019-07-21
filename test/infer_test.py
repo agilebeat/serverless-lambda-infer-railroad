@@ -30,10 +30,10 @@ def run_classify_image(img):
     sess = tf.Graph()
     with sess.as_default() as graph:
         tf.import_graph_def(graph_def)
-        softmax_tensor = sess.get_tensor_by_name('import/activation_24/Softmax:0')
+        softmax_tensor = sess.get_tensor_by_name('import/activation_8_1/Softmax:0')
 
     with tf.Session(graph=graph) as sess:
-        predictions = sess.run(softmax_tensor, {'import/conv2d_13_input:0': img})
+        predictions = sess.run(softmax_tensor, {'import/conv2d_1_input_1:0': img})
          
     return predictions    
         
@@ -69,6 +69,11 @@ def infer():
     predictions = run_classify_image(img)
 
 
+    if predictions[0][0] > predictions[0][1]:
+        dic = False
+    else:
+        dic = True
+
     response = {
         "statusCode": 200,
         "headers": {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
@@ -79,7 +84,8 @@ def infer():
 
 
 if __name__== "__main__":
-    printTensors()
+    infer()
+    #printTensors()
 
 
 
