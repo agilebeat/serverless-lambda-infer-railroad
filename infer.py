@@ -30,10 +30,10 @@ def run_classify_image(img):
     sess = tf.Graph()
     with sess.as_default() as graph:
         tf.import_graph_def(graph_def)
-        softmax_tensor = sess.get_tensor_by_name('import/activation_8_1/Softmax:0')
+        softmax_tensor = sess.get_tensor_by_name('import/activation_15_2/Softmax:0')
 
     with tf.Session(graph=graph) as sess:
-        predictions = sess.run(softmax_tensor, {'import/conv2d_1_input_1:0': img})
+        predictions = sess.run(softmax_tensor, {'import/conv2d_6_input_2:0': img})
          
     return predictions    
         
@@ -88,16 +88,4 @@ def inferHandler(event, context):
         "body": json.dumps({'RailClass': dic})
     }
     
-    return response
-
-
-
-
-
-
-
-
-
-
-
-
+return response
