@@ -1,14 +1,17 @@
 try:
   import unzip_requirements
+  import json
+  import boto3
+  from botocore.errorfactory import ClientError
+  import base64
+  import string
+  import random
+  from io import BytesIO
 except ImportError:
   pass
 
 
-import json
-import boto3
-import base64
-import string
-import random
+
         
 def select_server():
     servers = 'abc'
@@ -24,6 +27,27 @@ def get_redirect(z, x, y):
                                 x + '/' +
                                 y}
     }
+    return response
+
+def read_tile(x, y, z):
+    tile_64 = 'Initial String'
+    response = None
+    try:
+        client = boto3.client('s3')
+        tile = client.get_object(Bucket='wmts-maprover', Key='7/123/45566.png')
+        tile_64 = base64.b64encode(BytesIO(tile['Body'].read()))
+    except Exception as e:
+        response = {
+            "statusCode": 200,
+            "headers": {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+            "body": json.dumps({'Exception': str(e)})
+        }
+    else:
+        response = {
+            "statusCode": 200,
+            "headers": {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+            "body": json.dumps({'result':tile_64})
+        }
     return response
 
 def get_tile(z, x, y):
@@ -44,7 +68,7 @@ def wmtsHandler(event, context):
     x = event['pathParameters']['x']
     y = event['pathParameters']['y']
 
-    response = get_tile(z, x, y)
+    response = read_tile(z, x, y)
     return response
 
 
