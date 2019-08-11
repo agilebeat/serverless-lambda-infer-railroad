@@ -25,7 +25,8 @@ def get_redirect(z, x, y):
                                 '.tile.openstreetmap.org/' +
                                 z + '/' +
                                 x + '/' +
-                                y}
+                                y,
+                    'Access-Control-Allow-Origin': '*'}
     }
     return response
 
