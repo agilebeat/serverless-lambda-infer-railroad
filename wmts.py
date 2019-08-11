@@ -7,8 +7,12 @@ except ImportError:
 import json
 import boto3
 import base64
+import string
+import random
         
-
+def select_server():
+    servers = 'abc'
+    return random.choice(servers)
 
 def wmtsHandler(event, context):
     z = event['pathParameters']['z']
@@ -16,8 +20,10 @@ def wmtsHandler(event, context):
     y = event['pathParameters']['y']
     response = {
         "statusCode": 302,
-        "headers": {'Location': 'https://a.tile.openstreetmap.org/'
-                                + z + '/' +
+        "headers": {'Location': 'https://' +
+                                select_server() +
+                                '.tile.openstreetmap.org/' +
+                                z + '/' +
                                 x + '/' +
                                 y}
     }
