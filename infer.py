@@ -88,4 +88,4 @@ def inferHandler(event, context):
         "body": json.dumps({'RailClass': dic})
     }
     
-return response
+    return response
