@@ -29,24 +29,31 @@ def get_redirect(z, x, y):
     }
     return response
 
-def read_tile(x, y, z):
+def construct_debug_response(z, x, y, e):
+    response = {
+        "statusCode": 200,
+        "headers": {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+        "body": json.dumps({'Exception': str(e), 'key': str(z) +'/'+ str(x) + '/' + str(y)})
+    }
+    return response
+
+def read_tile(z, x, y):
     tile_64 = 'Initial String'
     response = None
     try:
         client = boto3.client('s3')
-        tile = client.get_object(Bucket='wmts-maprover', Key='7/123/45566.png')
-        tile_64 = base64.b64encode(BytesIO(tile['Body'].read()))
+        tile = client.get_object(Bucket='wmts-maprover', Key=str(z) +'/'+ str(x) + '/' + str(y))
+        tile_64 = base64.b64encode(BytesIO(tile['Body'].read()).read()).decode('UTF-8')
     except Exception as e:
-        response = {
-            "statusCode": 200,
-            "headers": {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-            "body": json.dumps({'Exception': str(e)})
-        }
+        response = get_redirect(z, x, y)
     else:
         response = {
+            "isBase64Encoded": True,
             "statusCode": 200,
-            "headers": {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-            "body": json.dumps({'result':tile_64})
+            "headers": {
+                "Content-Type": "image/png",
+            },
+            "body": tile_64
         }
     return response
 
