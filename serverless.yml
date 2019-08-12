@@ -16,7 +16,7 @@ service: maprover-infer # NOTE: update this with your service name
 provider:
   name: aws
   runtime: python3.6
-  stage: railroad
+  stage: prod
   region: us-east-1
 
 # you can add packaging information here
