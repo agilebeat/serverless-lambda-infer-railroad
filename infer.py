@@ -58,8 +58,8 @@ def inferHandler(event, context):
 
     predictions = run_classify_image(img)
 
-    AWS_BUCKET_NAME_rail = 'md-rail-maprover'
-    AWS_BUCKET_NAME_other = 'md-other-maprover' 
+    AWS_BUCKET_NAME_rail = 'wmts-maprover'
+    AWS_BUCKET_NAME_other = 'wmts-maprover' 
 
     if predictions[0][0] > predictions[0][1]:
         dic = False
@@ -88,4 +88,4 @@ def inferHandler(event, context):
         "body": json.dumps({'RailClass': dic})
     }
     
-return response
+    return response
